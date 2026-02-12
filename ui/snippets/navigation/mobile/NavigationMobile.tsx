@@ -6,6 +6,7 @@ import useNavItems, { isGroupItem } from 'lib/hooks/useNavItems';
 import IconSvg from 'ui/shared/IconSvg';
 import useIsAuth from 'ui/snippets/auth/useIsAuth';
 
+import ColorModeToggle from '../ColorModeToggle';
 import NavLink from '../vertical/NavLink';
 import NavLinkRewards from '../vertical/NavLinkRewards';
 import NavLinkGroup from './NavLinkGroup';
@@ -88,6 +89,9 @@ const NavigationMobile = ({ onNavLinkClick, isMarketplaceAppPage }: Props) => {
             </VStack>
           </Box>
         ) }
+        <Box mt={ 6 } pt={ 3 } borderTopWidth="1px" borderColor="divider">
+          <ColorModeToggle isCollapsed={ false }/>
+        </Box>
       </Box>
       { openedGroupIndex >= 0 && (
         <Box

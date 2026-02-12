@@ -1,9 +1,10 @@
-import { Box, chakra, Flex } from '@chakra-ui/react';
+import { Box, Button, chakra, Flex, useColorMode } from '@chakra-ui/react';
 import React from 'react';
 
 import config from 'configs/app';
 import useNavItems, { isGroupItem } from 'lib/hooks/useNavItems';
 import RewardsButton from 'ui/rewards/RewardsButton';
+import IconSvg from 'ui/shared/IconSvg';
 import { CONTENT_MAX_WIDTH } from 'ui/shared/layout/utils';
 import NetworkLogo from 'ui/snippets/networkMenu/NetworkLogo';
 import UserProfileDesktop from 'ui/snippets/user/profile/UserProfileDesktop';
@@ -15,6 +16,8 @@ import NavLinkGroup from './NavLinkGroup';
 
 const NavigationDesktop = () => {
   const { mainNavItems } = useNavItems();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const isDark = colorMode === 'dark';
 
   return (
     <Box borderColor="divider" borderBottomWidth="1px">
@@ -39,7 +42,16 @@ const NavigationDesktop = () => {
             }) }
           </Flex>
         </chakra.nav>
-        <Flex gap={ 2 }>
+        <Flex gap={ 2 } alignItems="center">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={ toggleColorMode }
+            aria-label={ isDark ? 'Switch to light mode' : 'Switch to dark mode' }
+            px={ 2 }
+          >
+            <IconSvg name={ isDark ? 'sun' : 'moon' } boxSize={ 5 }/>
+          </Button>
           { config.features.rewards.isEnabled && <RewardsButton size="sm"/> }
           {
             (config.features.account.isEnabled && <UserProfileDesktop buttonSize="sm"/>) ||

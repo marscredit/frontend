@@ -1,7 +1,6 @@
 import { Flex, Box, VStack, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 
-import config from 'configs/app';
 import { useAppContext } from 'lib/contexts/app';
 import * as cookies from 'lib/cookies';
 import useNavItems, { isGroupItem } from 'lib/hooks/useNavItems';
@@ -9,8 +8,8 @@ import getDefaultTransitionProps from 'theme/utils/getDefaultTransitionProps';
 import IconSvg from 'ui/shared/IconSvg';
 import useIsAuth from 'ui/snippets/auth/useIsAuth';
 import NetworkLogo from 'ui/snippets/networkMenu/NetworkLogo';
-import NetworkMenu from 'ui/snippets/networkMenu/NetworkMenu';
 
+import ColorModeToggle from '../ColorModeToggle';
 import TestnetBadge from '../TestnetBadge';
 import NavLink from './NavLink';
 import NavLinkGroup from './NavLinkGroup';
@@ -85,7 +84,6 @@ const NavigationDesktop = () => {
         transitionTimingFunction="ease"
       >
         <NetworkLogo isCollapsed={ isCollapsed }/>
-        { Boolean(config.UI.navigation.featuredNetworks) && <NetworkMenu isCollapsed={ isCollapsed }/> }
       </Box>
       <Box as="nav" mt={ 6 } w="100%">
         <VStack as="ul" spacing="1" alignItems="flex-start">
@@ -106,6 +104,9 @@ const NavigationDesktop = () => {
           </VStack>
         </Box>
       ) }
+      <Box mt="auto" pt={ 6 } w="100%">
+        <ColorModeToggle isCollapsed={ isCollapsed }/>
+      </Box>
       <IconSvg
         name="arrows/east-mini"
         width={ 6 }
