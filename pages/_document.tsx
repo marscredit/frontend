@@ -34,13 +34,13 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          { /* FONTS */ }
+          { /* FONTS - Mars Credit: Stack Sans Notch */ }
           <link
-            href={ config.UI.fonts.heading?.url ?? 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap' }
+            href={ config.UI.fonts.heading?.url ?? 'https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@400;500;600;700;800&display=swap' }
             rel="stylesheet"
           />
           <link
-            href={ config.UI.fonts.body?.url ?? 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' }
+            href={ config.UI.fonts.body?.url ?? 'https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@400;500;600;700;800&display=swap' }
             rel="stylesheet"
           />
 
