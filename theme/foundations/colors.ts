@@ -1,4 +1,24 @@
 const colors = {
+  /** Mars Credit brand palette */
+  mars: {
+    50: '#fef2f2',
+    100: '#fcc2bb',
+    200: '#f66849',
+    300: '#ff4433',
+    400: '#cc0000',
+    500: '#990000',
+    600: '#770000',
+    700: '#550000',
+    800: '#330000',
+    900: '#220000',
+    950: '#110000',
+  },
+  /** Mars Credit background tokens (dark theme) */
+  background: {
+    DEFAULT: '#0b0b0e',
+    panel: '#121218',
+    muted: '#1a1a22',
+  },
   green: {
     '100': '#C6F6D5',
     '400': '#48BB78',
@@ -36,7 +56,7 @@ const colors = {
     '800': '#1A202C',
     '900': '#171923',
   },
-  black: '#101112',
+  black: '#0b0b0e',
   white: '#ffffff',
   blackAlpha: {
     '50': 'RGBA(16, 17, 18, 0.04)',

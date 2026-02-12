@@ -2,8 +2,9 @@ import { theme } from '@chakra-ui/react';
 
 import config from 'configs/app';
 
-export const BODY_TYPEFACE = config.UI.fonts.body?.name ?? 'Inter';
-export const HEADING_TYPEFACE = config.UI.fonts.heading?.name ?? 'Poppins';
+/** Mars Credit: Stack Sans Notch for headings and body */
+export const BODY_TYPEFACE = config.UI.fonts.body?.name ?? 'Stack Sans Notch';
+export const HEADING_TYPEFACE = config.UI.fonts.heading?.name ?? 'Stack Sans Notch';
 
 const typography = {
   fonts: {

@@ -9,9 +9,7 @@ import config from 'configs/app';
 import type { ResourceError } from 'lib/api/resources';
 import useApiQuery from 'lib/api/useApiQuery';
 import useFetch from 'lib/hooks/useFetch';
-import useIssueUrl from 'lib/hooks/useIssueUrl';
 import { copy } from 'lib/html-entities';
-import IconSvg from 'ui/shared/IconSvg';
 import { CONTENT_MAX_WIDTH } from 'ui/shared/layout/utils';
 import NetworkAddToWallet from 'ui/shared/NetworkAddToWallet';
 
@@ -21,8 +19,33 @@ import getApiVersionUrl from './utils/getApiVersionUrl';
 
 const MAX_LINKS_COLUMNS = 4;
 
-const FRONT_VERSION_URL = `https://github.com/blockscout/frontend/tree/${ config.UI.footer.frontendVersion }`;
-const FRONT_COMMIT_URL = `https://github.com/blockscout/frontend/commit/${ config.UI.footer.frontendCommit }`;
+const FRONT_VERSION_URL = config.UI.footer.frontendVersion
+  ? `https://github.com/blockscout/frontend/tree/${ config.UI.footer.frontendVersion }`
+  : null;
+const FRONT_COMMIT_URL = config.UI.footer.frontendCommit
+  ? `https://github.com/blockscout/frontend/commit/${ config.UI.footer.frontendCommit }`
+  : null;
+
+const MARS_CREDIT_LINKS = [
+  {
+    icon: 'networks/logo-placeholder' as const,
+    iconSize: '18px',
+    text: 'Mars Credit',
+    url: 'https://marscredit.xyz',
+  },
+  {
+    icon: 'social/git' as const,
+    iconSize: '18px',
+    text: 'GitHub',
+    url: 'https://github.com/marscredit',
+  },
+  {
+    icon: 'explorer' as const,
+    iconSize: '18px',
+    text: 'Blockscan',
+    url: 'https://blockscan.marscredit.xyz',
+  },
+];
 
 const Footer = () => {
 
@@ -32,60 +55,14 @@ const Footer = () => {
     },
   });
   const apiVersionUrl = getApiVersionUrl(backendVersionData?.backend_version);
-  const issueUrl = useIssueUrl(backendVersionData?.backend_version);
   const logoColor = useColorModeValue('blue.600', 'white');
 
-  const BLOCKSCOUT_LINKS = [
-    {
-      icon: 'edit' as const,
-      iconSize: '16px',
-      text: 'Submit an issue',
-      url: issueUrl,
-    },
-    {
-      icon: 'social/canny' as const,
-      iconSize: '20px',
-      text: 'Feature request',
-      url: 'https://blockscout.canny.io/feature-requests',
-    },
-    {
-      icon: 'social/git' as const,
-      iconSize: '18px',
-      text: 'Contribute',
-      url: 'https://github.com/blockscout/blockscout',
-    },
-    {
-      icon: 'social/twitter' as const,
-      iconSize: '18px',
-      text: 'X (ex-Twitter)',
-      url: 'https://www.twitter.com/blockscoutcom',
-    },
-    {
-      icon: 'social/discord' as const,
-      iconSize: '24px',
-      text: 'Discord',
-      url: 'https://discord.gg/blockscout',
-    },
-    {
-      icon: 'brands/blockscout' as const,
-      iconSize: '18px',
-      text: 'All chains',
-      url: 'https://www.blockscout.com/chains-and-projects',
-    },
-    {
-      icon: 'donate' as const,
-      iconSize: '20px',
-      text: 'Donate',
-      url: 'https://github.com/sponsors/blockscout',
-    },
-  ];
-
   const frontendLink = (() => {
-    if (config.UI.footer.frontendVersion) {
+    if (config.UI.footer.frontendVersion && FRONT_VERSION_URL) {
       return <Link href={ FRONT_VERSION_URL } target="_blank">{ config.UI.footer.frontendVersion }</Link>;
     }
 
-    if (config.UI.footer.frontendCommit) {
+    if (config.UI.footer.frontendCommit && FRONT_COMMIT_URL) {
       return <Link href={ FRONT_COMMIT_URL } target="_blank">{ config.UI.footer.frontendCommit }</Link>;
     }
 
@@ -124,17 +101,13 @@ const Footer = () => {
     return (
       <Box gridArea={ gridArea }>
         <Flex columnGap={ 2 } fontSize="xs" lineHeight={ 5 } alignItems="center" color="text">
-          <span>Made with</span>
-          <Link href="https://www.blockscout.com" isExternal display="inline-flex" color={ logoColor } _hover={{ color: logoColor }}>
-            <IconSvg
-              name="networks/logo-placeholder"
-              width="80px"
-              height={ 4 }
-            />
+          <Link href="https://marscredit.xyz" isExternal display="inline-flex" color={ logoColor } _hover={{ color: logoColor }} fontWeight={ 600 }>
+            Mars Credit
           </Link>
+          <span>blockchain explorer</span>
         </Flex>
         <Text mt={ 3 } fontSize="xs">
-          Blockscout is a tool for inspecting and analyzing EVM based blockchains. Blockchain explorer for Ethereum Networks.
+          EVM-compatible block explorer for the Mars Credit network. Mineable, proof-of-work Layer-1.
         </Text>
         <Box mt={ 6 } alignItems="start" fontSize="xs" lineHeight={ 5 }>
           { apiVersionUrl && (
@@ -148,7 +121,7 @@ const Footer = () => {
             </Text>
           ) }
           <Text>
-            Copyright { copy } Blockscout Limited 2023-{ (new Date()).getFullYear() }
+            Copyright { copy } Mars Credit { (new Date()).getFullYear() }
           </Text>
         </Box>
       </Box>
@@ -191,7 +164,7 @@ const Footer = () => {
           >
             {
               ([
-                { title: 'Blockscout', links: BLOCKSCOUT_LINKS },
+                { title: 'Mars Credit', links: MARS_CREDIT_LINKS },
                 ...(linksData || []),
               ])
                 .slice(0, colNum)
@@ -243,7 +216,7 @@ const Footer = () => {
           justifyContent={{ lg: 'flex-end' }}
           mt={{ base: 8, lg: 0 }}
         >
-          { BLOCKSCOUT_LINKS.map(link => <FooterLinkItem { ...link } key={ link.text }/>) }
+          { MARS_CREDIT_LINKS.map(link => <FooterLinkItem { ...link } key={ link.text }/>) }
         </Grid>
       </Grid>
     </Box>

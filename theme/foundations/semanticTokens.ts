@@ -14,10 +14,11 @@ const semanticTokens = {
     },
     link: {
       'default': 'blue.600',
-      _dark: 'blue.300',
+      _dark: 'mars.400',
     },
     link_hovered: {
       'default': 'blue.400',
+      _dark: 'mars.300',
     },
     icon_link_external: {
       'default': 'gray.300',
